@@ -1,33 +1,217 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <title>柠檬邪教地区</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="favicon.ico">
+<title>★★★柠檬邪教地区★★★</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
-        <br/>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">首页</a></li>
-            <li class="breadcrumb-item"><a href="local.html">地区</a></li>
-            <li class="breadcrumb-item"><a href="member.html">成员</a></li>
-            <li class="breadcrumb-item"><a href="ad.html">推广</a></li>
-            <li class="breadcrumb-item"><a href="articles.html">文章</a></li>
+
+<!-- 顶部提示条 -->
+<div class="browser-warn">
+  ⚠ 您的浏览器版本较低，建议使用 Internet Explorer 5.5 以上版本、800×600 分辨率浏览本站。
+  <span class="x" onclick="this.parentNode.remove()">[ 关闭 ]</span>
+</div>
+
+<!-- 顶部公告 -->
+<marquee class="top" scrollamount="8" behavior="alternate">
+  ★☆★ 欢迎来到柠檬邪教地区 ★☆★ 裴裴乐裴裴乐 ★☆★ 本站已通过柠檬邪教内部认证 ★☆★ 说是邪教其实啥也没有 ★☆★ 看完请按 Ctrl+D 收藏 ★☆★
+</marquee>
+
+<div class="box">
+  <div class="stamp">站长推荐★★★★★</div>
+
+  <h1 class="wordart" data-flicker>柠檬邪教地区</h1>
+  <div class="sub">★ 欢 迎 光 临 ★</div>
+
+  <div class="emoji-row">
+    <span style="font-size:40px; animation:spin 3s linear infinite;">🍋</span>
+    <span style="font-size:40px; animation:blink 1.4s steps(1) infinite;">👾</span>
+    <span style="font-size:40px; animation:spin 4s linear infinite reverse;">🌟</span>
+    <span style="font-size:40px; animation:shake .35s infinite;">💀</span>
+    <span style="font-size:40px; animation:blink 1.1s steps(1) infinite;">👶</span>
+    <span style="font-size:40px; animation:wobble 2s ease-in-out infinite;">🐶</span>
+  </div>
+
+  <!-- 导航 -->
+  <nav class="nav">
+    <a href="index.html">🏠 首页</a>
+    <a href="local.html" class="here" aria-current="page">📍 地区</a>
+    <a href="member.html">👥 成员</a>
+    <a href="ad.html">📢 推广</a>
+    <a href="articles.html">📄 文章</a>
+  </nav>
+
+  <!-- 访问统计 -->
+  <div class="hit">
+    您是第 <span class="counter" id="fakeCounter">000000</span> 位访客
+    &nbsp;|&nbsp; 当前在线 <span id="onlineCount" style="color:#c02020;font-weight:bold;">1</span> 人
+    &nbsp;|&nbsp; 今日访问 <span id="todayCount" style="font-weight:bold;">13</span> 次
+  </div>
+
+  <!-- 加载进度 -->
+  <div class="loading">
+    <span class="bar"><span class="fill"></span></span>
+    页面加载中，请稍候……（若长时间没有反应，请按 F5 刷新）
+  </div>
+
+  <!-- 三栏 -->
+  <table class="layout">
+    <tr>
+      <!-- 左栏 -->
+      <td class="col-side">
+        <div class="panel-title">📢 站内公告</div>
+        <marquee direction="up" height="90" scrollamount="2" style="border:0; font-size:12px; background:#fff; color:#000; text-align:left; font-weight:normal;">
+          · 本站已连续 20 年没有更新，这是第 21 年<br><br>
+          · 站长换了新电脑，但还是用记事本<br><br>
+          · 论坛正在重建，预计 2007 年上线<br><br>
+          · 请不要在半夜访问本站
+        </marquee>
+
+        <div class="panel-title" style="background:#8a1a1a;">🏆 排行榜</div>
+        <ol class="rank">
+          <li>柠勇者（大狗）</li>
+          <li>杀马特团长</li>
+          <li>钱刑</li>
+          <li>你</li>
         </ol>
-    </div>
-    <div class="text-center">
-        <h1>柠檬邪教地区</h1><br/>
-        <p>鸡西市的几个同志<del>闲的没事</del>创办的一个邪教！</p>
-        <p>如果想加入，我们会亲切的搞死你们！（雾</p>
-        <p>（说是邪教其实啥也没有）</p>
-    </div>
-    
+
+        <div class="panel-title" style="background:#1a6b2a;">🌐 多语言</div>
+        <p class="mini">
+          <a href="#" onclick="return false;">中文简体</a> /
+          <a href="#" onclick="return false;">中文繁體</a> /
+          <a href="#" onclick="return false;">English（建设中）</a><br>
+          <span class="dead">日本語</span>
+          <span class="dead">한국어</span>
+        </p>
+      </td>
+
+      <!-- 中栏 -->
+      <td class="col-main">
+        <div class="panel-title">📍 本站所在地</div>
+        <div class="rant">
+          <p>鸡西市的几个同志<del>闲的没事</del>创办的一个邪教！</p>
+          <p>如果想加入，我们会亲切的搞死你们！（雾</p>
+          <p>（说是邪教其实啥也没有）</p>
+          <p>目前本教在以下地区设有分部，欢迎就近报名：</p>
+
+          <table class="members">
+            <tr>
+              <th>地区</th>
+              <th>负责人</th>
+              <th>状态</th>
+            </tr>
+            <tr>
+              <td>鸡西市（总舵）</td>
+              <td>站长</td>
+              <td>正常营业</td>
+            </tr>
+            <tr>
+              <td>哈尔滨分舵</td>
+              <td>大狗</td>
+              <td>建设中</td>
+            </tr>
+            <tr>
+              <td>齐齐哈尔分舵</td>
+              <td>团长</td>
+              <td>筹备中</td>
+            </tr>
+            <tr>
+              <td>北京办事处</td>
+              <td>暂无</td>
+              <td>未成立</td>
+            </tr>
+          </table>
+
+          <p class="blue">以上地址均不对外公开，请勿擅自前往。</p>
+        </div>
+
+        <div class="mapbox">🗺️ 地图加载中……（本功能需要安装 RealPlayer 插件）</div>
+      </td>
+
+      <!-- 右栏 -->
+      <td class="col-side">
+        <div class="panel-title" style="background:#8a1a1a;">📢 广告位招租</div>
+        <div style="font-size:40px; animation:spin 6s linear infinite;">💰</div>
+        <p class="mini" style="text-align:center;">
+          每天 114514 人浏览<br>
+          <b>仅需 5 元 / 月</b><br>
+          支持银行汇款<br>
+          详情请联系站长
+        </p>
+
+        <div class="panel-title" style="background:#1f2a80;">🔗 友情链接</div>
+        <p class="mini">
+          <a href="#" onclick="return false;">百度</a><br>
+          <a href="#" onclick="return false;">新浪</a><br>
+          <a href="#" onclick="return false;">雅虎中国</a><br>
+          <a href="#" onclick="return false;">柠檬邪教论坛（建设中）</a><br>
+          <a href="ad.html">柠檬邪教推广</a><br>
+          <a href="articles.html">带劲小文章</a><br>
+          <a href="#" onclick="return false;">站长的 QQ 空间</a>
+        </p>
+
+        <div class="panel-title" style="background:#1a6b2a;">🕹️ 本站认证</div>
+        <p class="mini" style="text-align:center;">
+          <span class="badge b1">⭐ 800×600</span><br>
+          <span class="badge b2">🚧 施工中</span><br>
+          <span class="badge b4">✔ 已认证</span><br>
+          <span class="badge b5">📼 世纪回忆</span>
+        </p>
+      </td>
+    </tr>
+  </table>
+
+  <!-- 小按钮 -->
+  <div class="badges">
+    <span class="badge b1">BEST VIEWED IN 800×600</span>
+    <span class="badge b2">UNDER CONSTRUCTION</span>
+    <span class="badge b3">本站已认证</span>
+    <span class="badge b4">W3C 认证</span>
+    <span class="badge b5">⚡ POWERED BY 记事本</span>
+  </div>
+
+  <!-- 施工 -->
+  <div class="construction">
+    <span>🚧 网 站 施 工 中 🚧</span>
+    &nbsp;预计完工日期：<b>2099 年 12 月 31 日</b>&nbsp;
+    <span>敬请期待</span>
+  </div>
+</div>
+
+<!-- 底部公告 -->
+<marquee direction="right" scrollamount="6" style="margin-top:14px;">
+  ←←← 本网站由柠檬邪教站务组维护 · 建议使用 Netscape Navigator 4.0 浏览 · 站长 QQ：1145141919810 · 请勿在 IE6 下打开 ←←←
+</marquee>
+
+<div class="footer">
+  <span class="big">© 1998-2026 柠檬邪教 · 版权所有 · 侵权必究</span><br>
+  网站备案号：鸡 ICP 备 1145141919810 号&nbsp;|&nbsp; 公安备案：申请中&nbsp;|&nbsp; 工信部：审核中<br>
+  本站使用 <b>FrontPage 98</b> + <b>记事本</b> 开发，不保证在 IE6 以下正常显示<br>
+  <span style="font-size:11px;color:#555;">最后更新：2003 年 6 月 1 日</span>
+  <button type="button" class="about" id="aboutBtn" title="关于本站">·</button>
+</div>
+
+<button class="to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ 回到顶部 ↑</button>
+
+<!-- 关于本站 -->
+<div class="dlg" id="aboutDlg" role="dialog" aria-modal="true" aria-labelledby="aboutDlgTitle">
+  <div class="title-bar">
+    <span id="aboutDlgTitle">关于本站</span>
+    <span class="x" data-close="aboutDlg">✕</span>
+  </div>
+  <div class="dlg-body">
+    <p><b>柠檬邪教官方网站</b> v0.1b（测试版）</p>
+    <p>本站始建于 1998 年，目前仍在施工中，敬请期待。</p>
+    <p>最佳浏览效果：IE5.5 / 800×600</p>
+    <p>站长 QQ：1145141919810</p>
+    <button data-close="aboutDlg">确 定</button>
+    <button data-close="aboutDlg">关 闭</button>
+  </div>
+</div>
+
+<script src="js/site.js"></script>
 </body>
 </html>
