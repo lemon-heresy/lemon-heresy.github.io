@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#4f46e5" />
+  <meta name="description" content="大学英语四级 / 专业词汇背单词网页，纯原生 HTML + CSS + JavaScript，本地离线可用。" />
+  <title>四级背单词 · Word Trainer</title>
+  <!-- 相对路径引入样式文件，保证把整个文件夹拷走后仍可直接打开 -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ============ 纯 CSS 背景装饰（不依赖任何图片） ============ -->
+  <div class="bg-deco" aria-hidden="true">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="orb orb-3"></span>
+    <span class="grid-mask"></span>
+  </div>
+
+  <div class="app">
+    <!-- ======================= 顶部栏 ======================= -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">Aa</div>
+        <div class="brand-text">
+          <h1 data-i18n="appTitle">四级背单词</h1>
+          <p data-i18n="appSubtitle">CET-4 / 专业词汇 · 离线本地版</p>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <!-- 词库切换：base=基础四级，zhao=赵振博专属，custom=我的自定义 -->
+        <label class="select-wrap">
+          <span class="select-label" data-i18n="bank">词库</span>
+          <select id="bankSelect" aria-label="切换词库">
+            <option value="base" data-i18n="bankBase">基础四级词库</option>
+            <option value="zhao" data-i18n="bankZhao">赵振博专属词库</option>
+            <option value="custom" data-i18n="bankCustom">我的自定义词库</option>
+          </select>
+        </label>
+
+        <!-- 学习模式切换：card=卡片，choice=选择题，spell=拼写 -->
+        <div class="seg" id="modeTabs" role="tablist" aria-label="学习模式">
+          <button type="button" class="seg-btn is-active" data-mode="card" role="tab" data-i18n="modeCard">卡片</button>
+          <button type="button" class="seg-btn" data-mode="choice" role="tab" data-i18n="modeChoice">选择</button>
+          <button type="button" class="seg-btn" data-mode="spell" role="tab" data-i18n="modeSpell">拼写</button>
+        </div>
+
+        <!-- 中英文界面切换按钮 -->
+        <button type="button" id="langBtn" class="pill-btn" title="切换界面语言 / Switch UI language">
+          <span class="pill-dot" aria-hidden="true"></span>
+          <span id="langBtnText">中 / EN</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ======================= 学习统计 ======================= -->
+    <section class="stats" aria-label="学习统计">
+      <div class="stat">
+        <span class="stat-label" data-i18n="statProgress">学习进度</span>
+        <strong class="stat-value" id="statProgress">0%</strong>
+        <div class="mini-bar" aria-hidden="true"><i id="miniBarFill"></i></div>
+      </div>
+      <div class="stat">
+        <span class="stat-label" data-i18n="statToday">今日已学</span>
+        <strong class="stat-value" id="statToday">0</strong>
+      </div>
+      <div class="stat">
+        <span class="stat-label" data-i18n="statAccuracy">今日正确率</span>
+        <strong class="stat-value" id="statAccuracy">—</strong>
+      </div>
+      <div class="stat">
+        <span class="stat-label" data-i18n="statMastered">已掌握</span>
+        <strong class="stat-value" id="statMastered">0</strong>
+      </div>
+      <div class="stat">
+        <span class="stat-label" data-i18n="statWrong">错词</span>
+        <strong class="stat-value" id="statWrong">0</strong>
+      </div>
+      <div class="stat">
+        <span class="stat-label" data-i18n="statFav">收藏</span>
+        <strong class="stat-value" id="statFav">0</strong>
+      </div>
+    </section>
+
+    <!-- 当前词库的总进度条 -->
+    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar">
+      <i id="progressFill"></i>
+    </div>
+
+    <!-- ======================= 主体卡片 ======================= -->
+    <!-- 卡片内部结构完全由 app.js 根据当前“模式”动态渲染 -->
+    <main class="stage">
+      <article id="card" class="card" tabindex="0" aria-live="polite"></article>
+    </main>
+
+    <!-- ======================= 底部操作区 ======================= -->
+    <section class="actions" aria-label="单词操作">
+      <button type="button" id="prevBtn" class="btn ghost" title="上一个（←）">
+        <span aria-hidden="true">←</span>
+        <span data-i18n="prev">上一个</span>
+      </button>
+      <button type="button" id="dontKnowBtn" class="btn danger" title="不认识，加入错词本">
+        <span aria-hidden="true">✕</span>
+        <span data-i18n="dontKnow">不认识</span>
+      </button>
+      <button type="button" id="knowBtn" class="btn primary" title="认识并标记为已掌握">
+        <span aria-hidden="true">✓</span>
+        <span data-i18n="know">认识 / 掌握</span>
+      </button>
+      <button type="button" id="favBtn" class="btn ghost" title="收藏 / 取消收藏">
+        <span class="fav-star" aria-hidden="true">☆</span>
+        <span id="favBtnLabel">收藏</span>
+      </button>
+      <button type="button" id="nextBtn" class="btn ghost" title="下一个（→）">
+        <span data-i18n="next">下一个</span>
+        <span aria-hidden="true">→</span>
+      </button>
+    </section>
+
+    <!-- ======================= 页脚工具条 ======================= -->
+    <footer class="bottombar">
+      <p class="shortcuts" data-i18n="shortcuts">
+        快捷键：空格 显示/提交 · ←/→ 切换 · 1–4 选择答案
+      </p>
+      <div class="tools">
+        <button type="button" id="wrongBtn" class="tool-btn">
+          <span data-i18n="wrongBook">错词本</span>
+          <b id="wrongCount">0</b>
+        </button>
+        <button type="button" id="favListBtn" class="tool-btn">
+          <span data-i18n="favList">收藏</span>
+          <b id="favCount">0</b>
+        </button>
+        <button type="button" id="addBtn" class="tool-btn accent">
+          <span aria-hidden="true">＋</span>
+          <span data-i18n="addWord">添加新词</span>
+        </button>
+        <button type="button" id="resetBtn" class="text-btn" data-i18n="reset">重置进度</button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ======================= 弹窗：错词本 ======================= -->
+  <div class="modal" id="wrongModal" hidden>
+    <div class="modal-mask" data-close></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="wrongTitle">
+      <header class="modal-head">
+        <h2 id="wrongTitle" data-i18n="wrongBook">错词本</h2>
+        <button type="button" class="icon-btn" data-close aria-label="关闭">×</button>
+      </header>
+      <p class="modal-sub" id="wrongSub"></p>
+      <div class="word-list" id="wrongList"></div>
+    </div>
+  </div>
+
+  <!-- ======================= 弹窗：收藏 ======================= -->
+  <div class="modal" id="favModal" hidden>
+    <div class="modal-mask" data-close></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="favTitle">
+      <header class="modal-head">
+        <h2 id="favTitle" data-i18n="favList">收藏</h2>
+        <button type="button" class="icon-btn" data-close aria-label="关闭">×</button>
+      </header>
+      <p class="modal-sub" id="favSub"></p>
+      <div class="word-list" id="favList"></div>
+    </div>
+  </div>
+
+  <!-- ======================= 弹窗：添加新词 ======================= -->
+  <div class="modal" id="addModal" hidden>
+    <div class="modal-mask" data-close></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="addTitle">
+      <header class="modal-head">
+        <h2 id="addTitle" data-i18n="addTitle">添加新词</h2>
+        <button type="button" class="icon-btn" data-close aria-label="关闭">×</button>
+      </header>
+      <p class="modal-sub" data-i18n="addDesc">
+        新词会保存到浏览器 localStorage，并加入「我的自定义词库」。
+      </p>
+
+      <form id="addForm" class="word-form" autocomplete="off">
+        <div class="form-row">
+          <label class="field">
+            <span data-i18n="fWord">单词 *</span>
+            <input type="text" name="word" required maxlength="60" placeholder="e.g. diligent" />
+          </label>
+          <label class="field">
+            <span data-i18n="fPhonetic">音标</span>
+            <input type="text" name="phonetic" maxlength="60" placeholder="/ˈdɪlɪdʒənt/" />
+          </label>
+        </div>
+        <div class="form-row">
+          <label class="field">
+            <span data-i18n="fPos">词性</span>
+            <input type="text" name="pos" maxlength="20" placeholder="adj." />
+          </label>
+          <label class="field">
+            <span data-i18n="fMeaning">中文释义 *</span>
+            <input type="text" name="meaning" required maxlength="120" placeholder="勤奋的；用功的" />
+          </label>
+        </div>
+        <label class="field">
+          <span data-i18n="fExample">英文例句</span>
+          <textarea name="example" rows="2" maxlength="300" placeholder="She is a diligent student."></textarea>
+        </label>
+        <label class="field">
+          <span data-i18n="fExampleCn">例句翻译</span>
+          <textarea name="exampleCn" rows="2" maxlength="300" placeholder="她是一个勤奋的学生。"></textarea>
+        </label>
+        <div class="form-actions">
+          <button type="button" class="btn ghost" data-close data-i18n="cancel">取消</button>
+          <button type="submit" class="btn primary" data-i18n="save">保存单词</button>
+        </div>
+      </form>
+
+      <div class="my-words">
+        <h3 data-i18n="myWords">我的自定义单词</h3>
+        <div id="customList" class="word-list compact"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 轻提示 -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- 无 JS 时的降级提示 -->
+  <noscript>
+    <p style="text-align:center;padding:24px">本页面需要启用 JavaScript 才能使用。</p>
+  </noscript>
+
+  <!-- 先加载数据，再加载逻辑；顺序不能颠倒 -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
